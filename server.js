@@ -1,12 +1,22 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+// const io = socketIo(server);
+
+const io = socketIo(server, {
+  cors: {
+      origin: "http://127.0.0.1:5500",
+      methods: ["GET", "POST"]
+  }
+});
 
 app.use(express.static('public'));
+app.use(cors());
+app.use(express.json());
 
 io.on('connection', (socket) => {
   console.log('New client connected');
