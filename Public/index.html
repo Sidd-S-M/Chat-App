@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chat {
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 1em;
+        }
+        #messages {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 1em;
+        }
+        #message-form {
+            display: flex;
+        }
+        #message-form input {
+            flex: 1;
+            padding: 10px;
+        }
+        #message-form button {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <p>Welcome to the Chat</p>
+    <div id="chat">
+        <h1>Chat App</h1>
+        <div>
+            <label for="channel">Channel:</label>
+            <input type="text" id="channel" placeholder="Enter channel name">
+            <button id="join">Join</button>
+        </div>
+        <div id="messages"></div>
+        <form id="message-form">
+            <input id="message-input" autocomplete="off" placeholder="Type a message">
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

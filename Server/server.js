@@ -1,9 +1,17 @@
-const path =require('path');
+const path = require('path');
 const express=require('express');
-var app=express();
-const port= process.env.PORT || 3000;
-const Public_path=path.join(__dirname,'/../Public');
-app.use(express.static(Public_path));
-app.listen(port, ()=>{
-    console.log(`Server is Running on port ${port}`);
+const socketIO=require('socket.io');
+const http=require('http');
+const publicPath=path.join(__dirname,'/../Public');
+const port = process.env.PORT || 3000;
+let app=express();
+let Server=http.createServer(app);
+let io=socketIO(Server);
+app.use(express.static(publicPath));
+io.on('connection',(socket)=>{
+    console.log("A new user connected");
 })
+Server.listen(3000,()=>{
+    console.log(`Server is running on port ${port}`)
+})
+
